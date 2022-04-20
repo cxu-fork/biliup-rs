@@ -96,7 +96,7 @@ jobs:
       - name: Build release binary (linux-musl)
         if: matrix.build == 'x86_64-linux-static'
         run: |
-          sudo apt install musl-gcc
+          sudo apt-get install musl-tools
           cargo build --release --target ${{ matrix.target }}
 
       - name: Strip release binary (linux and macos)
