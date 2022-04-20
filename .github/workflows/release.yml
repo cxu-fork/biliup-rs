@@ -12,6 +12,7 @@ on:
 env:
   BIN_NAME: biliup
   PROJECT_NAME: biliupR
+  PKG_CONFIG_SYSROOT_DIR: /
 #  REPO_NAME: spectralops/rust-ci-release-template
 #  BREW_TAP: jondot/homebrew-tap
 
