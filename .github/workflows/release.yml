@@ -84,11 +84,21 @@ jobs:
           args: --release --locked --target ${{ matrix.target }}
 
       - name: Build release binary
+        if: matrix.build != 'x86_64-linux-static'
         uses: actions-rs/cargo@v1
         with:
           use-cross: ${{ matrix.cross }}
           command: build
           args: --release --locked --target ${{ matrix.target }}
+          
+      - name: Build release binary (linux-musl)
+        if: matrix.build == 'x86_64-linux-static'
+        run: |
+          docker run --rm -v \
+            "$(pwd)":/home/rust/src \
+            messense/rust-musl-cross:${{ matrix.target }} \
+            cargo build --release \
+            --locked --target ${{ matrix.target }}
 
 
       - name: Strip release binary (linux and macos)
@@ -100,7 +110,7 @@ jobs:
         run: |
           docker run --rm -v \
             "$PWD/target:/target:Z" \
-            rustembedded/cross:${{ matrix.target }} \
+            rustembedded/cross:x86_64-musl \
             aarch64-linux-gnu-strip \
             /target/${{ matrix.target }}/release/$BIN_NAME
 
