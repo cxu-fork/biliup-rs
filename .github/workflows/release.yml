@@ -95,10 +95,8 @@ jobs:
       - name: Build release binary (linux-musl)
         if: matrix.build == 'x86_64-linux-static'
         run: |
-          docker run --rm -v \
-            "$(pwd)":/home/rust/src \
-            messense/rust-musl-cross:x86_64-musl \
-            cargo build --release 
+          alias rust-musl-builder='docker run --rm -it -v "$(pwd)":/home/rust/src messense/rust-musl-cross:x86_64-musl'
+          rust-musl-builder cargo build --release
 
 
       - name: Strip release binary (linux and macos)
