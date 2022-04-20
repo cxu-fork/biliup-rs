@@ -16,6 +16,7 @@ opt-level = 's'
 panic = 'abort'
 
 [dependencies]
+reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] }
 serde = { version = "1.0", features = ["derive"] }
 reqwest_cookie_store = "0.2.0"
 cookie_store = "0.15.0"
@@ -49,7 +50,7 @@ qrcode = "0.12.0"
 image = "0.23.14"
 glob = "0.3.0"
 serde_yaml = "0.8"
-reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] }
+
 
 
 #[target.'cfg(all(target_arch="aarch64", target_vendor="unknown", target_os="linux", target_env="gnu"))'.dependencies]
@@ -58,5 +59,5 @@ reqwest = { version = "0.11", default-features = false, features = ["json", "rus
 #[target.'cfg(all(target_arch="x86_64", target_vendor="unknown", target_os="linux", target_env="musl"))'.dependencies]
 #reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] }
 
-[target.'cfg(not(all(target_arch="aarch64", target_vendor="unknown", target_os="linux", target_env="gnu")))'.dependencies]
-reqwest = { version = "0.11", features = ["json"] }
+#[target.'cfg(not(all(target_arch="aarch64", target_vendor="unknown", target_os="linux", target_env="gnu")))'.dependencies]
+#reqwest = { version = "0.11", features = ["json"] }
