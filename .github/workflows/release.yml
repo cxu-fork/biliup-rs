@@ -90,7 +90,7 @@ jobs:
         with:
           use-cross: ${{ matrix.cross }}
           command: test
-          args: --release --locked --target ${{ matrix.target }}
+          args: --release  --target ${{ matrix.target }}
 
       - name: Build release binary
 #         if: matrix.build != 'x86_64-linux-static'
@@ -98,7 +98,7 @@ jobs:
         with:
           use-cross: ${{ matrix.cross }}
           command: build
-          args: --release --locked --target ${{ matrix.target }}
+          args: --release --target ${{ matrix.target }}
           
 #       - name: Build release binary (linux-musl)
 #         if: matrix.build == 'x86_64-linux-static'
