@@ -85,7 +85,7 @@ jobs:
           sudo apt-get install musl-tools
 
       - name: Run cargo test
-#         if: matrix.build != 'x86_64-linux-static'
+        if: matrix.build != 'x86_64-linux-static'
         uses: actions-rs/cargo@v1
         with:
           use-cross: ${{ matrix.cross }}
@@ -93,18 +93,22 @@ jobs:
           args: --release --locked --target ${{ matrix.target }}
 
       - name: Build release binary
-#         if: matrix.build != 'x86_64-linux-static'
+        if: matrix.build != 'x86_64-linux-static'
         uses: actions-rs/cargo@v1
         with:
           use-cross: ${{ matrix.cross }}
           command: build
           args: --release --locked --target ${{ matrix.target }}
           
-#       - name: Build release binary (linux-musl)
-#         if: matrix.build == 'x86_64-linux-static'
-#         run: |
-#           sudo apt-get install musl-tools
-#           cargo build --release --target ${{ matrix.target }}
+      - name: Build release binary (linux-musl)
+        if: matrix.build == 'x86_64-linux-static'
+        run: |
+          sudo apt-get install musl-tools
+          docker run --rm -v \
+            "$(pwd)":/home/rust/src \
+            messense/rust-musl-cross:${{ matrix.target }} \
+            cargo build --release \
+            --locked --target ${{ matrix.target }}
 
       - name: Strip release binary (linux and macos)
         if: matrix.build == 'x86_64-linux' || matrix.build == 'x86_64-macos'
