@@ -140,6 +140,7 @@ jobs:
 
   publish:
     name: Publish
+    if: startsWith(github.event.ref, 'refs/tags/v')
     needs: [dist]
     runs-on: ubuntu-latest
     steps:
