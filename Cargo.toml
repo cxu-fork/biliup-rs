@@ -15,3 +15,6 @@ strip = true
 inherits = "release"
 opt-level = 's'
 panic = 'abort'
+
+[dependencies]
+reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] }
