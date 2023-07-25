@@ -9,6 +9,8 @@ on:
     ## - release
     branches:    
       - 'master'
+      - 'upstream-*'
+      - 'up-patch-*'
   workflow_dispatch:
 
 env:
