@@ -5,7 +5,8 @@ on:
 
   push:
     tags:
-    - 'v[0-9]+.[0-9]+.[0-9]+'
+    - 'v*'
+  workflow_dispatch:
     ## - release
 
 env:
